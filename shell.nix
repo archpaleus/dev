@@ -2,6 +2,7 @@ with import <nixpkgs> { config.allowUnfree = true; config.android_sdk.accept_lic
 
 let
   nodePkgs = [
+    pkgs.nodejs
     nodePackages.prettier
   ];
 
@@ -43,14 +44,18 @@ let
   ];
 
 in pkgs.mkShellNoCC rec {
-  buildInputs = customInputs ++ nodePkgs ++ [
+  buildInputs = [
     #latest.rustChannels.stable.rust
     pkg-config
     openssl
 
     pkgs.autoflake
+    pkgs.cargo
     pkgs.curl
+    pkgs.direnv
+    pkgs.fish
     pkgs.git
+    pkgs.glow
     pkgs.grpcurl
     pkgs.htop
     pkgs.jq
@@ -58,10 +63,7 @@ in pkgs.mkShellNoCC rec {
     pkgs.less
     pkgs.man
     pkgs.moreutils
-    pkgs.nix
-    pkgs.nodejs
     pkgs.openssh
-    pkgs.p7zip
     pkgs.pipenv
     pkgs.pkg-config
     pkgs.postgresql
@@ -69,6 +71,7 @@ in pkgs.mkShellNoCC rec {
     pkgs.ps
     pkgs.ripgrep
     pkgs.rsync
+    pkgs.rustc
     pkgs.stunnel
     pkgs.tree
     pkgs.unzip
@@ -76,7 +79,10 @@ in pkgs.mkShellNoCC rec {
     pkgs.which
     pkgs.zip
     pkgs.zsh
-  ];
+  ]
+  ++ customInputs
+  ++ nodePkgs
+  ;
 
   shellHook = ''
   '';
