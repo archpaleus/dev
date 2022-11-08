@@ -39,7 +39,7 @@ Copy to ~/.config/nixpkgs/config.nix
         jq
         htop
         ncdu
-        #rust
+        rustc
         tree
       ];
     };
@@ -47,6 +47,13 @@ Copy to ~/.config/nixpkgs/config.nix
 }
 ```
 
+Apply config.nix to your default environment: 
 ```
 nix-env -riA nixpkgs.mine
 ```
+
+### Enable direnv
+```
+echo 'eval "$(direnv hook zsh)"' >>~/.zshrc
+```
+
