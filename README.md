@@ -27,7 +27,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 ```
 
 ### Customize config.nix
-Copy to ~/.config/nixpkgs/config.nix
+Make your ~/.config/nixpkgs/config.nix
 ```
 {
   packageOverrides = pkgs: with pkgs; {
@@ -36,6 +36,7 @@ Copy to ~/.config/nixpkgs/config.nix
       paths = [
         direnv
         git
+        glow
         jq
         htop
         ncdu
