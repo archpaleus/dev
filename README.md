@@ -14,7 +14,7 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 ### Install NerdFonts
 ```
 brew tap homebrew/cask-fonts &&
-brew install --cask font-meslo-nerd-font
+brew install --cask font-meslo-lg-nerd-font
 ```
 or
 
