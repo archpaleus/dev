@@ -11,19 +11,16 @@ sh <(curl -L https://nixos.org/nix/install)
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-### Install NerdFonts
+### Install PowerLevel10k Theme for OhMyZsh
 ```
-brew tap homebrew/cask-fonts &&
-brew install --cask font-meslo-lg-nerd-font
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 ```
-or
 
-https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Meslo/M/Regular/complete
-
-### Install PowerLevel10k
 update your ~/.zshrc with
 ```
+echo '''
 ZSH_THEME="powerlevel10k/powerlevel10k"
+''' >>~/.zshrc
 ```
 
 ### Customize config.nix
