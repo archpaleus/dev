@@ -45,7 +45,7 @@ Make your ~/.config/nixpkgs/config.nix
 }
 ```
 
-Apply config.nix to your default environment: 
+Apply config.nix to your default environment:
 ```
 nix-env -riA nixpkgs.mine
 ```
