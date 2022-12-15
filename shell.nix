@@ -6,18 +6,17 @@ let
     nodePackages.prettier
   ];
 
-  python = pkgs.python39;
-  pythonPackages = pkgs.python39Packages;
+  rustPkgs = [
+    pkgs.cargo
+    pkgs.rustc
+  ];
 
-  pythonEnv = python.withPackages (ps: [
-      ps.black
-      ps.google-cloud-bigquery
-      ps.google-cloud-storage
-      ps.mypy
-      ps.pylint
-      ps.pyyaml
-      ps.urllib3
-      ps.yamllint
+  myPython = pkgs.python39.withPackages (ps: [
+    ps.black
+    ps.mypy
+    ps.pip
+    ps.pylint
+    ps.wheel
   ]);
 
   android-sdk-composition = pkgs.androidenv.composeAndroidPackages {
@@ -35,25 +34,23 @@ let
     useGoogleTVAddOns = false;
     includeExtras = [
         "extras;google;gcm"
-    ];    
+    ];
   };
-  
+
   customInputs = [
-    pythonEnv
+    nodePkgs
+    myPython
+    rustPkgs
     #android-sdk-composition.androidsdk
   ];
 
-in pkgs.mkShellNoCC rec {
+in pkgs.mkShell rec {
   buildInputs = [
-    #latest.rustChannels.stable.rust
-    pkg-config
-    openssl
-
-    pkgs.autoflake
-    pkgs.cargo
     pkgs.curl
     pkgs.direnv
+    pkgs.exa
     pkgs.fish
+    pkgs.fd
     pkgs.git
     pkgs.glow
     pkgs.grpcurl
@@ -71,8 +68,8 @@ in pkgs.mkShellNoCC rec {
     pkgs.ps
     pkgs.ripgrep
     pkgs.rsync
-    pkgs.rustc
     pkgs.stunnel
+    pkgs.openssl
     pkgs.tree
     pkgs.unzip
     pkgs.vim
@@ -81,7 +78,6 @@ in pkgs.mkShellNoCC rec {
     pkgs.zsh
   ]
   ++ customInputs
-  ++ nodePkgs
   ;
 
   shellHook = ''
