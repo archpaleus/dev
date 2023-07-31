@@ -5,16 +5,24 @@
 sh <(curl -L https://nixos.org/nix/install)
 ```
 
+### Set Nix Configuration
+Edit your nix configuration /etc/nix/nix.conf
+```sh
+extra-experimental-features = flakes
+build-users-group = nixbld
+```
+
 ### Customize config.nix
 Make your `~/.config/nixpkgs/config.nix`
 ```sh
 {
   packageOverrides = pkgs: with pkgs; {
-    mine = pkgs.buildEnv {
-      name = "mine";
+    base-environment = pkgs.buildEnv {
+      name = "base-environment";
       paths = [
         comma
         direnv
+        fd
         fzf
         git
         glow
@@ -34,7 +42,7 @@ Make your `~/.config/nixpkgs/config.nix`
 
 Apply `config.nix` to your default environment:
 ```sh
-nix-env -riA nixpkgs.mine
+nix-env -riA nixpkgs.base-environment
 ```
 
 ### Enable direnv
