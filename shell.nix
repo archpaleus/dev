@@ -6,12 +6,13 @@ let
     nodePackages.prettier
   ];
 
-  rustPkgs = [
-    pkgs.cargo
-    pkgs.rustc
-  ];
+  # TODO: use the rust overlay provided by rust
+  #rustPkgs = [
+  #  pkgs.cargo
+  #  pkgs.rustc
+  #];
 
-  myPython = pkgs.python39.withPackages (ps: [
+  myPython = pkgs.python311.withPackages (ps: [
     ps.black
     ps.mypy
     ps.pip
@@ -19,6 +20,7 @@ let
     ps.wheel
   ]);
 
+  # TODO: this needs fixing
   android-sdk-composition = pkgs.androidenv.composeAndroidPackages {
     # Regenerate via nixpkgs/pkgs/development/mobile/androidenv/generate.sh
     toolsVersion = "26.1.1";
@@ -38,44 +40,37 @@ let
   };
 
   customInputs = [
-    nodePkgs
+    #nodePkgs
     myPython
-    rustPkgs
     #android-sdk-composition.androidsdk
   ];
 
 in pkgs.mkShell rec {
   buildInputs = [
+    pkgs.ansifilter
+    pkgs.bash
+    pkgs.black
+    pkgs.buf
     pkgs.curl
     pkgs.direnv
     pkgs.exa
-    pkgs.fish
     pkgs.fd
+    pkgs.fish
     pkgs.git
     pkgs.glow
     pkgs.grpcurl
     pkgs.htop
     pkgs.jq
-    pkgs.killall
-    pkgs.less
     pkgs.man
     pkgs.moreutils
     pkgs.openssh
-    pkgs.pipenv
     pkgs.pkg-config
     pkgs.postgresql
     pkgs.protobuf
     pkgs.ps
     pkgs.ripgrep
-    pkgs.rsync
-    pkgs.stunnel
-    pkgs.openssl
     pkgs.tree
-    pkgs.unzip
     pkgs.vim
-    pkgs.which
-    pkgs.zip
-    pkgs.zsh
   ]
   ++ customInputs
   ;
