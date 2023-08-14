@@ -6,14 +6,9 @@ let
     nodePackages.prettier
   ];
 
-  # TODO: use the rust overlay provided by rust
-  #rustPkgs = [
-  #  pkgs.cargo
-  #  pkgs.rustc
-  #];
-
   myPython = pkgs.python311.withPackages (ps: [
     ps.black
+    ps.mdformat
     ps.mypy
     ps.pip
     ps.pylint
@@ -62,7 +57,6 @@ in pkgs.mkShell rec {
     pkgs.htop
     pkgs.jq
     pkgs.man
-    pkgs.mdformat
     pkgs.moreutils
     pkgs.openssh
     pkgs.pkg-config
