@@ -62,6 +62,7 @@ in pkgs.mkShell rec {
     pkgs.htop
     pkgs.jq
     pkgs.man
+    pkgs.mdformat
     pkgs.moreutils
     pkgs.openssh
     pkgs.pkg-config
